@@ -5,17 +5,6 @@ from tkinter import ttk
 from tkinter import messagebox
 from algod import *
 
-#järjend = [['A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-# ['A', 'B', 'B', 'B', ' ', ' ', ' ', ' ', ' ', ' '], 
-# ['A', ' ', ' ', ' ', 'C', 'C', 'C', ' ', ' ', ' '], 
-# ['A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-# ['A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-# ['A', ' ', ' ', ' ', ' ', ' ', ' ', 'D', ' ', ' '], 
-# ['A', ' ', ' ', ' ', ' ', ' ', ' ', 'D', ' ', ' '], 
-# ['A', ' ', ' ', ' ', ' ', ' ', ' ', 'D', ' ', ' '], 
-# ['A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
-# ['A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
-
 alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 def puhasta():
@@ -51,7 +40,9 @@ def joonista(jarjend):
             kujund = tahvel.create_rectangle(eelmise_loppx, y_koordinaat, eelmise_loppx + kestus * 16,y_koordinaat2, fill=color_picker(protsess))
             keskpaik = eelmise_loppx+kestus * 8
             protsessi_id = tahvel.create_text(keskpaik, y_koordinaat+10, text=protsess)
-            nr = tahvel.create_text(nr_x, 50, text=str(kaugus)) # 0-49
+
+            if i == 0:
+                nr = tahvel.create_text(nr_x, 50, text=str(kaugus)) # 0-49
             kaugus += kestus
             eelmise_loppx += kestus*16
             nr_x += kestus*16
@@ -63,8 +54,8 @@ def joonista(jarjend):
             except:
                 protsess = tahvel.create_text(70, y_koordinaat+10, text="-") 
 
-        y_koordinaat += 30
-        y_koordinaat2 += 30
+        y_koordinaat += 20
+        y_koordinaat2 += 20
         eelmise_loppx = 110
     etapi_silt = tahvel.create_text(20, 50, text="Etapp", font='Helvetica 9 bold')
     protsessi_silt = tahvel.create_text(70, 50, text="Protsess", font='Helvetica 9 bold')
@@ -133,7 +124,7 @@ predef3 = "0,4;1,5;2,2;3,1;4,6;6,3"
 raam = Tk()
 raam.title("Planeerimisalgoritmid")
 raam.resizable(False, False)
-raam.geometry("880x700")
+raam.geometry("930x500")
 
 var = IntVar()
 var.set(1)
@@ -164,7 +155,7 @@ kasutaja_jarjend = ttk.Entry(raam)
 kasutaja_jarjend.place(x=120, y=130, height=25, width=240)
 kasutaja_jarjend.insert(END,"1,8;35,4;3,6;4,2;1,4;3,3;1,2;5,1;50,1")
 
-tahvel = Canvas(raam, width=880, height=480, background="white")
+tahvel = Canvas(raam, width=930, height=280, background="white")
 tahvel.place(x=0, y=220)
 
 first_fit_nupp = ttk.Button(raam, text="first-fit", command = lambda : jooksuta_algoritmi("first_fit"))
