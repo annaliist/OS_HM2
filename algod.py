@@ -19,8 +19,35 @@ järjend = [['A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' 
 ['I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
 [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
 
+
+
 # [[1, 8], [35, 4], [3, 6], [4, 2], [1, 4], [3, 3], [1, 2], [5, 1], [50, 1]]
 def first_fit(jarjend):
+    valjund = [[],[],[],[],[],[],[],[],[],[]]
+
+    def kas_mahub(x,y,z): # paremale, vasakule, alguspunkt (jarjend[z])
+        veerg = z
+        rida = 0
+        mahub = True
+
+        for i in range(50):
+            for j in range(x):
+                for k in range(y):
+                    if jarjend[z][rida]
+
+        return mahub
+
+    # täidame lõpp-järjendi tühjade väljadega
+    for i in range(len(valjund)):
+        valjund[i].append(" ")
+
+    for i in range(len(jarjend)):
+        if kas_mahub(jarjend[i][0], jarjend[i][1], i): # proovib esimest vaba auku enda reas
+            print("round 1")
+        else:
+            print("ei mahu") # kui ei mahu, lõpetab programmi
+            break
+
     valjund = []
 
     return valjund
