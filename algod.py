@@ -19,37 +19,61 @@ järjend = [['A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' 
 ['I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
 [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'A', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']]
 
-
+alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+valjund = []
 
 # [[1, 8], [35, 4], [3, 6], [4, 2], [1, 4], [3, 3], [1, 2], [5, 1], [50, 1]]
 def first_fit(jarjend):
+    global valjund
+    valjund.clear
     valjund = [[],[],[],[],[],[],[],[],[],[]]
 
     def kas_mahub(x,y,z): # paremale, vasakule, alguspunkt (jarjend[z])
-        veerg = z
-        rida = 0
+        global valjund
+        veerg = 0
         mahub = True
 
         for i in range(50):
-            for j in range(x):
-                for k in range(y):
-                    if jarjend[z][rida]
+            veerg = i
+            print("VEERG " + str(veerg))
 
-        return mahub
+            try:
+                for j in range(y):
+                    for k in range(x):
+                        if valjund[z+j][veerg] == " ":
+                            mahub = True
+                            break
+                        else:
+                            mahub = False
+                            break
+                
+                veerg = veerg - y
+                break
+            except:
+                mahub = False
+                break
+
+        if mahub:
+            return veerg # top left koordinaadid valjund[z][veerg]
+        else:
+            return 0
 
     # täidame lõpp-järjendi tühjade väljadega
-    for i in range(len(valjund)):
-        valjund[i].append(" ")
-
     for i in range(len(jarjend)):
-        if kas_mahub(jarjend[i][0], jarjend[i][1], i): # proovib esimest vaba auku enda reas
-            print("round 1")
-        else:
-            print("ei mahu") # kui ei mahu, lõpetab programmi
-            break
+        for j in range(50):
+            valjund[i].append(" ")
 
-    valjund = []
+    print(kas_mahub(jarjend[0][0], jarjend[0][1], 0))
 
+    # for i in range(len(jarjend)):
+    #     if kas_mahub(jarjend[i][0], jarjend[i][1], i) == 0: # otsib esimest vaba auku enda reas
+    #         print("Protsess " + alphabet[i] + " ei mahu!") # kui ei mahu, lõpetab programmi
+    #         print("Programm lõpetatud.")
+    #         break
+    #     else:
+    #         print("round 1")
+
+    print(valjund)
     return valjund
 
 first_fit(massiiviks("1,8;35,4;3,6;4,2;1,4;3,3;1,2;5,1;50,1"))
