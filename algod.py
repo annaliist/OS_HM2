@@ -30,54 +30,76 @@ def first_fit(jarjend):
 
     def kas_mahub(x,y,z): # paremale, vasakule, alguspunkt (jarjend[z])
         global valjund
-        veerg = 0
         mahub = True
+        alguspunkt = 0
 
         for i in range(50):
-            veerg = i
-            print("VEERG " + str(veerg))
 
             try:
-                for j in range(y):
-                    for k in range(x):
-                        if valjund[z+j][veerg] == " ":
-                            mahub = True
-                            break
+                for veerg in range(y):
+                    for rida in range(x):
+                        print("VEERG " + str(veerg))
+                        print("RIDA: " + str(rida + z))
+                        if valjund[rida + z][veerg] == " ":
+                            print("Tühi")    
+                            mahub = True                    
                         else:
+                            print("Pole tühi, järgmine veerg")
+                            alguspunkt += 1
                             mahub = False
                             break
                 
-                veerg = veerg - y
-                break
+                if mahub:
+                    print("ALGUSPUNKT: " + str(alguspunkt))
+                    break
+
             except:
+                print("Ei mahu")
                 mahub = False
                 break
 
         if mahub:
-            return veerg # top left koordinaadid valjund[z][veerg]
+            print("VIIMANE OTSUS: " + alphabet[z] + " mahub, alatest veerg " + str(alguspunkt) + ", rida " + str(z))
+            return alguspunkt # top left koordinaadid valjund[z][alguspunkt]
         else:
-            return 0
+            print("VIIMANE OTSUS: ei mahu")
+            return 404
+
+    def taida_auk(x,y,j,k,s): # alguskoordinaat (x,y), protsessi mõõdud (j x k), s - sümbol
+        global valjund
+        
+        for rida in range(j):
+            for veerg in range(k):
+                valjund[rida+x][veerg+y] = alphabet[s]
+                
 
     # täidame lõpp-järjendi tühjade väljadega
-    for i in range(len(jarjend)):
+    for i in range(10):
         for j in range(50):
             valjund[i].append(" ")
 
-    print(kas_mahub(jarjend[0][0], jarjend[0][1], 0))
 
-    # for i in range(len(jarjend)):
-    #     if kas_mahub(jarjend[i][0], jarjend[i][1], i) == 0: # otsib esimest vaba auku enda reas
-    #         print("Protsess " + alphabet[i] + " ei mahu!") # kui ei mahu, lõpetab programmi
-    #         print("Programm lõpetatud.")
-    #         break
-    #     else:
-    #         print("round 1")
+    for i in range(len(jarjend)):
+        print(jarjend[i])
+        koordinaat = kas_mahub(jarjend[i][1], jarjend[i][0], i)
+        if koordinaat == 404: # otsib esimest vaba auku enda reas
+            print("Protsess " + alphabet[i] + " ei mahu!") # kui ei mahu, lõpetab programmi
+            print("Programm lõpetatud.")
+            break
+        else:
+            print("Lisan protsessi " + alphabet[i])
+            taida_auk(i, koordinaat, jarjend[i][1], jarjend[i][0], i)
 
-    print(valjund)
+            for k in range(10):
+                print(valjund[k])
+
+    for i in valjund:
+        print(valjund[i])
+
     return valjund
 
 first_fit(massiiviks("1,8;35,4;3,6;4,2;1,4;3,3;1,2;5,1;50,1"))
-
+#first_fit(massiiviks("1,8;35,4"))
 
 
 
