@@ -24,7 +24,6 @@ def color_picker(protsess):
 
 # joonistab tahvlile protsesse kujutavad ristkülikud numbrite ja protsesside nimedega
 def joonista(jarjend):
-    print(jarjend)
     puhasta()
     eelmise_loppx = 110
     nr_x = 118
@@ -32,9 +31,7 @@ def joonista(jarjend):
     y_koordinaat2 = 80
     kaugus = 0
     for i in range(len(jarjend)):
-        print("I:" + str(i))
         for j in range(50):
-            print("J:" + str(j))
             protsess = jarjend[i][j]
             kestus = 1
             kujund = tahvel.create_rectangle(eelmise_loppx, y_koordinaat, eelmise_loppx + kestus * 16,y_koordinaat2, fill=color_picker(protsess))
@@ -89,35 +86,21 @@ def massiiviMeister():
     else:
         return massiiviks(predef1)
 
-
-# näitab programmis käimasolevat protsessijada
-def massiiviTeavitaja(massiiv):
-    text.delete(1.0, END)
-    for jupp in massiiv:
-        text.insert(INSERT, str(jupp) + "\n")
-
 def kasuvalija(jarjend, algoritm):
     if algoritm == "first_fit":
         return first_fit(jarjend)
     elif algoritm == "last_fit":
         return last_fit(jarjend)
-    elif algoritm == "best_fit":
-        return best_fit(jarjend)
-    elif algoritm == "random_fit":
-        return random_fit(jarjend)
-    elif algoritm == "worst_fit":
-        return worst_fit(jarjend)
 
 def jooksuta_algoritmi(algoritm):
     jarjend = massiiviMeister()
-    massiiviTeavitaja(jarjend)
     valjund = kasuvalija(jarjend, algoritm)
     joonista(valjund)
     keskm_oot = tahvel.create_text(80, 20, text="Algoritm: " + str(algoritm).replace("_", " ").upper(), font='Helvetica 9 bold')
 
-predef1 = "0,7;1,5;2,3;3,1;4,2;5,1"
-predef2 = "0,2;1,4;12,4;15,5;21,10"
-predef3 = "0,4;1,5;2,2;3,1;4,6;6,3"
+predef1 = "4,5;2,7;9,2;4,6;7,1;6,4;8,8;3,6;1,10;9,2"
+predef2 = "1,10;6,6;3,9;2,4;1,6;5,2;1,4;5,2;2,1;2,7"
+predef3 = "5,10;6,6;3,9;8,4;3,6;5,12;1,4;15,3;3,4;9,7"
 
 
 # GUI
@@ -148,9 +131,6 @@ silt3.place(x=120, y=100)
 silt_run = ttk.Label(raam, text="Algoritmi käivitamiseks klõpsa nupule")
 silt_run.place(x=10, y=160)
 
-silt_tahvel = ttk.Label(raam, text="Käsil olevad protsessid:")
-silt_tahvel.place(x=450, y=10)
-
 kasutaja_jarjend = ttk.Entry(raam)
 kasutaja_jarjend.place(x=120, y=130, height=25, width=240)
 kasutaja_jarjend.insert(END,"1,8;35,4;3,6;4,2;1,4;3,3;1,2;5,1;50,1")
@@ -163,20 +143,5 @@ first_fit_nupp.place(x=10, y=190,height=25, width=80)
 
 last_fit_nupp = ttk.Button(raam, text="last-fit", command = lambda : jooksuta_algoritmi("last_fit"))
 last_fit_nupp.place(x=100, y=190,height=25, width=80)
-
-best_fit_nupp = ttk.Button(raam, text="best-fit", command = lambda : jooksuta_algoritmi("best_fit"))
-best_fit_nupp.place(x=190, y=190,height=25, width=80)
-
-random_fit_nupp = ttk.Button(raam, text="random-fit", command = lambda : jooksuta_algoritmi("random_fit"))
-random_fit_nupp.place(x=280, y=190,height=25, width=80)
-
-worst_fit_nupp = ttk.Button(raam, text="worst-fit", command = lambda : jooksuta_algoritmi("worst_fit"))
-worst_fit_nupp.place(x=370, y=190,height=25, width=80)
-
-puhasta_nupp = ttk.Button(raam, text="Puhasta väljund", command = lambda : puhasta() )
-puhasta_nupp.place(x=500, y=190,height=25, width=130)
-
-text = Text(raam, width=25, height=9)
-text.place(x=450, y=30)
 
 raam.mainloop()
